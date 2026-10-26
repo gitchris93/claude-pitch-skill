@@ -16,8 +16,8 @@ fertige Idee vor Gericht; hier entwickeln zwölf Geschworene erst eigene Ideen.
 | Phase | Wer | Was |
 |---|---|---|
 | 1 Anfrage verstehen | Claude (Protokollführer) | Ziel, Bedürfnis, Einschränkungen, Annahmen → `request.md`. Bei zu vagen Anfragen eine gezielte Rückfrage, bei Garantie-Erwartungen ein „Reality check“. |
-| (Recherche) | Claude | Nur wenn aktuelle Marktfakten die Entscheidung ändern können → `research.md` mit Quellen. |
-| 2 Ideen | 12 Juroren, unabhängig | Je eine konkrete Idee mit Problem, Zielgruppe, Lösung, Geschäftsmodell, Preis, Vorteil, Aufwand, Startkosten, Risiken, Nachfragetest und Annahmen. |
+| (Recherche) | Claude | Eine gemeinsame Recherche für die ganze Jury: bestehende Angebote und Preise, Wettbewerbsdichte, Plattformregeln → `research.md` mit Quellen. |
+| 2 Ideen | 12 Juroren, gleichzeitig und unabhängig | Je eine konkrete Idee mit Problem, Zielgruppe, Lösung, Geschäftsmodell, Preis, Vorteil, Aufwand, Startkosten, Risiken, Nachfragetest und Annahmen. |
 | 3 Debatte | 12 Juroren | Jeder liest alle Ideen: Top 3, stärkster Einwand, Verbesserung, Kombination, zu verwerfende Idee. |
 | 3b Shortlist | Obmann/Obfrau | Fasst die Debatte zusammen, verwirft Ideen, verbessert und kombiniert, und erstellt eine Shortlist mit 3–5 Kandidaten. |
 | 4 Bewertung | 3 unabhängige Gutachter | 0–10 je Kriterium, optional KO bei Verletzung harter Vorgaben (z. B. Budget). |

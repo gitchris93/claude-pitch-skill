@@ -31,7 +31,7 @@ LATEST = os.path.join(ROOT, "LATEST")
 PHASES = ["ideas", "debate", "shortlist", "scoring", "verdict", "plan"]
 SCORERS = 3
 QUICK_SCORERS = 1
-WAVE = 6
+WAVE = 12  # all jurors at once: they never see each other, so waves only cost time
 TIE_MARGIN = 3.0
 SKIPPED = "SKIPPED"
 CRITERIA = [("market", 20), ("revenue", 20), ("reach", 15), ("feasibility", 15),
@@ -526,6 +526,17 @@ def idea_paths(state):
                      for i, j in enumerate(jobs(state, "ideas")))
 
 
+def search_rule(juror):
+    # Searches are the slowest part of the idea round, so only the jurors whose lens depends on
+    # live market facts get one; everyone else works from the research file.
+    if juror.get("searches"):
+        return ("You may run at most %d web search, and only if one fact would change your idea (for example "
+                "whether a direct competitor exists and what it charges). Cite the URL next to the fact."
+                % juror["searches"])
+    return ("Do not run web searches. Use the research file for market facts; anything else about "
+            "competitors or prices is an estimate, so say so.")
+
+
 def brief_text(state, phase, job):
     h = head(state, job)
     if phase == "ideas":
@@ -541,10 +552,10 @@ def brief_text(state, phase, job):
             "expects something unrealistic, such as guaranteed income or a fixed profit within a short time, "
             "do not play along: design an idea whose core hypothesis can be tested cheaply, and say so under "
             "the assumptions.\n\n"
-            "You may run at most 2 web searches, and only if one fact would change your idea (for example "
-            "whether a direct competitor exists and what it charges). Cite the URL next to the fact.\n\n"
+            "%s\n\n"
             "Write exactly this structure:\n\n%s"
-            % (idx + 1, len(state["jury"]), juror["name"], juror["lens"], idea_template(state, 320)))
+            % (idx + 1, len(state["jury"]), juror["name"], juror["lens"], search_rule(juror),
+               idea_template(state, 320)))
     if phase == "debate":
         idx = int(job["id"].split("-")[1]) - 1
         juror = state["jury"][idx]
@@ -586,7 +597,9 @@ def brief_text(state, phase, job):
             "- The TOP 3 votes are one input, not the decision. Do not score the candidates: independent "
             "assessors score them after you.\n"
             "- Ideas marked SKIPPED or missing do not exist.\n\n"
-            "Write exactly this structure, 1400 words at most:\n\n"
+            "Write exactly this structure, 900 words at most. Keep every label of every candidate, but "
+            "write one tight line per label: the assessors score from these lines, so cut decoration, not "
+            "facts, numbers or assumptions.\n\n"
             "## %s\n"
             "5 to 8 bullets: the key arguments, objections and improvements, naming the jurors who raised "
             "them. Then one line per discarded idea: Jxx: why it was dropped.\n\n"
@@ -669,7 +682,9 @@ def brief_text(state, phase, job):
             "- If something does not apply (a service may need no database), say so in one line instead of "
             "padding.\n\n"
             "Write exactly these sections with these level-2 headings, in this order, using ### for "
-            "sub-headings. 1800 words at most.\n\n"
+            "sub-headings. 1300 words at most: write bullets, not prose, and state each fact once; refer back "
+            "to it instead of repeating it in a later section. Every item listed below must still be "
+            "covered.\n\n"
             "## %s\n"
             "### Produktdefinition / product definition: working name, precise description, ideal customer "
             "profiles, main problem and concrete benefit, the one unique selling point, positioning against "
