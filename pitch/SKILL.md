@@ -14,7 +14,7 @@ license: MIT
 metadata:
   author: "GitChris93"
   based-on: "court by Alex Chen (https://github.com/alexyc9381/court-skill), MIT"
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # pitch
@@ -100,14 +100,21 @@ Use the language of the request. Rules:
 - **Hard limits** the user named (for example "at most 500 euros", "alone") go under Constraints with
   the word "hard": the assessors knock out candidates that break them.
 
-## Step 3: research, only when it changes the decision
+## Step 3: research once, for the whole jury
 
-If the request depends on current market facts (prices of existing tools, whether a market is
-crowded, platform rules), run 3 to 6 targeted web searches and write `.ideacourt/research.md`:
-one bullet per fact, with the source URL and the date you read it. Prefer official product and
+Most jurors do not search the web themselves (only the Market Strategist and the Competitor Analyst
+get one search each), so this file is what the rest of the jury knows about the market. For a
+business-idea request it almost always matters: run 4 to 6 targeted web searches, in parallel, and
+write `.ideacourt/research.md`. Cover:
+
+- the main existing products or services in the space the request points at, with their prices
+- how crowded the obvious directions are
+- platform rules or costs the obvious directions depend on (app stores, ad platforms, AI API pricing)
+
+One bullet per fact, with the source URL and the date you read it. Prefer official product and
 pricing pages, documentation and reputable reports; mark community anecdotes as such. No opinions,
-no recommendations. Skip this step when nothing you could look up would change which idea wins, or
-when no web tool is available; the briefs then tell every agent that market numbers are estimates.
+no recommendations. Skip this step only when no web tool is available or the request is not about a
+market at all; the briefs then tell every agent that market numbers are estimates.
 
 ## Step 4: open the court
 

@@ -26,8 +26,8 @@ plan, a validation test and a roadmap.
 | # | Phase | Who | What happens |
 |---|---|---|---|
 | 1 | Understand | Claude (the clerk) | Separates your real goal from the solution you named, and writes down constraints (budget, time, skills) and every assumption. If the request is too vague, Claude asks you one targeted question. If it expects guaranteed income, Claude turns that into a testable hypothesis instead. |
-| 2 | Research | Claude | Only if current market facts could change the decision: a few targeted searches, each fact with its source. |
-| 3 | Ideas | 12 jurors, independently | Each juror pitches one concrete idea: problem, customer, solution, business model, pricing, edge, build effort, startup cost, risks, demand test and assumptions. |
+| 2 | Research | Claude | One shared round of searches for the whole jury: existing offers and their prices, how crowded the space is, platform rules. Each fact with its source. |
+| 3 | Ideas | 12 jurors, all at once and independently | Each juror pitches one concrete idea: problem, customer, solution, business model, pricing, edge, build effort, startup cost, risks, demand test and assumptions. |
 | 4 | Debate | 12 jurors | Every juror reads all twelve ideas and names a top 3, the strongest objection, one improvement, a possible combination and one idea to drop. |
 | 5 | Shortlist | Foreperson | Drops weak ideas, merges and improves the strong ones, and builds a shortlist of 3 to 5 candidates. |
 | 6 | Scoring | 3 assessors, independently | Rate every candidate from 0 to 10 on seven criteria, and can knock out anything that breaks a hard limit you set, such as your budget. |

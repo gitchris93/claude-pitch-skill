@@ -123,7 +123,7 @@ class FullRun(Court):
         self.assertEqual(len({j["name"] for j in self.state["jury"]}), 12)
         out = run("prompts", "ideas")
         self.assertIn("wave 1:", out)
-        self.assertIn("wave 2:", out)
+        self.assertNotIn("wave 2:", out)  # all twelve run at once
         self.assertEqual(out.count("brief="), 12)
 
     def test_phases_in_order(self):
@@ -346,6 +346,29 @@ class Briefs(Court):
             self.assertIn("**%s:**" % label, text)
         self.assertIn("never see the other jurors' ideas", text)
         self.assertIn("unrealistic", text)
+
+    def test_only_market_and_competitor_jurors_search(self):
+        searching = [self.state["jury"][i]["name"] for i in range(12)
+                     if "at most 1 web search" in self.brief("ideas", i)]
+        self.assertEqual(searching, ["The Market Strategist", "The Competitor Analyst"])
+        for i in range(12):
+            text = self.brief("ideas", i)
+            if self.state["jury"][i]["name"] not in searching:
+                self.assertIn("Do not run web searches", text)
+
+    def test_shorter_outputs_keep_every_required_item(self):
+        self.until_verdict()
+        shortlist = self.brief("shortlist")
+        self.assertIn("900 words at most", shortlist)
+        self.assertIn("Keep every label of every candidate", shortlist)
+        for _, label in ic.labels(self.state)["fields"]:
+            self.assertIn("**%s:**" % label, shortlist)
+        self.put("verdict", "judge", "WINNER: S1\n## Executive Summary\nx\n## Gewinner\ny\n")
+        plan = self.brief("plan")
+        self.assertIn("1300 words at most", plan)
+        self.assertIn("Every item listed below must still be covered", plan)
+        for _, title in ic.labels(self.state)["plan"]:
+            self.assertIn("## %s" % title, plan)
 
     def test_scoring_brief_applies_budget_and_avoids_double_counting(self):
         self.until_verdict()
